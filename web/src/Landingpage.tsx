@@ -1,5 +1,13 @@
-import { Button } from "@/components/ui/button"
-import { Award, CheckCircle, GraduationCap, Link, LucideWallet, Shield, Users } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import {
+  Award,
+  CheckCircle,
+  GraduationCap,
+  Link,
+  LucideWallet,
+  Shield,
+  Users,
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -53,12 +61,14 @@ export default function Home() {
                     Decentralized Scholarships on the SUI Blockchain
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Connect students directly with sponsors. Earn scholarships by achieving academic goals and
-                    completing tasks.
+                    Connect students directly with sponsors. Earn scholarships
+                    by achieving academic goals and completing tasks.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button className="bg-teal-600 hover:bg-teal-700">Apply as Student</Button>
+                  <Button className="bg-teal-600 hover:bg-teal-700">
+                    Apply as Student
+                  </Button>
                   <Button variant="outline">Become a Sponsor</Button>
                 </div>
                 <div className="flex items-center space-x-4 text-sm">
@@ -95,36 +105,50 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-12">
               <div className="flex flex-col items-center justify-center space-y-2 border rounded-lg p-4">
                 <div className="text-3xl font-bold">$2.5M+</div>
-                <div className="text-sm text-muted-foreground text-center">Scholarships Awarded</div>
+                <div className="text-sm text-muted-foreground text-center">
+                  Scholarships Awarded
+                </div>
               </div>
               <div className="flex flex-col items-center justify-center space-y-2 border rounded-lg p-4">
                 <div className="text-3xl font-bold">1,200+</div>
-                <div className="text-sm text-muted-foreground text-center">Students Funded</div>
+                <div className="text-sm text-muted-foreground text-center">
+                  Students Funded
+                </div>
               </div>
               <div className="flex flex-col items-center justify-center space-y-2 border rounded-lg p-4">
                 <div className="text-3xl font-bold">350+</div>
-                <div className="text-sm text-muted-foreground text-center">Active Sponsors</div>
+                <div className="text-sm text-muted-foreground text-center">
+                  Active Sponsors
+                </div>
               </div>
               <div className="flex flex-col items-center justify-center space-y-2 border rounded-lg p-4">
                 <div className="text-3xl font-bold">98%</div>
-                <div className="text-sm text-muted-foreground text-center">Goal Completion Rate</div>
+                <div className="text-sm text-muted-foreground text-center">
+                  Goal Completion Rate
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+        <section
+          id="features"
+          className="w-full py-12 md:py-24 lg:py-32 bg-gray-50"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-teal-100 px-3 py-1 text-sm text-teal-700">
                   Platform Features
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Why Choose ScholarChain?</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Why Choose ScholarChain?
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-                  Our platform leverages SUI blockchain technology to create a transparent, efficient, and direct
-                  connection between students and sponsors.
+                  Our platform leverages SUI blockchain technology to create a
+                  transparent, efficient, and direct connection between students
+                  and sponsors.
                 </p>
               </div>
             </div>
@@ -135,8 +159,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold">Direct P2P Funding</h3>
                 <p className="text-center text-muted-foreground">
-                  Sponsors can directly fund students without intermediaries, reducing fees and increasing the impact of
-                  each contribution.
+                  Sponsors can directly fund students without intermediaries,
+                  reducing fees and increasing the impact of each contribution.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-4 rounded-lg border p-6">
@@ -145,8 +169,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold">Merit-Based Rewards</h3>
                 <p className="text-center text-muted-foreground">
-                  Students receive scholarships based on verified achievements like high GPAs, course completion, or
-                  leadership positions.
+                  Students receive scholarships based on verified achievements
+                  like high GPAs, course completion, or leadership positions.
                 </p>
               </div>
               <div className="flex flex-col items-center space-y-4 rounded-lg border p-6">
@@ -155,8 +179,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold">Blockchain Security</h3>
                 <p className="text-center text-muted-foreground">
-                  All transactions and achievements are recorded on the SUI blockchain, ensuring transparency and
-                  preventing fraud.
+                  All transactions and achievements are recorded on the SUI
+                  blockchain, ensuring transparency and preventing fraud.
                 </p>
               </div>
             </div>
@@ -164,14 +188,19 @@ export default function Home() {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="w-full py-12 md:py-24 lg:py-32 bg-white">
+        <section
+          id="how-it-works"
+          className="w-full py-12 md:py-24 lg:py-32 bg-white"
+        >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">How It Works</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  How It Works
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
-                  Our platform makes it easy for students to receive scholarships and for sponsors to support academic
-                  excellence.
+                  Our platform makes it easy for students to receive
+                  scholarships and for sponsors to support academic excellence.
                 </p>
               </div>
             </div>
@@ -183,39 +212,50 @@ export default function Home() {
                 </h3>
                 <ol className="space-y-4">
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">1</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      1
+                    </div>
                     <div>
                       <h4 className="font-bold">Create Your Profile</h4>
                       <p className="text-muted-foreground">
-                        Sign up and create a detailed profile showcasing your academic goals, achievements, and
-                        aspirations.
+                        Sign up and create a detailed profile showcasing your
+                        academic goals, achievements, and aspirations.
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">2</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      2
+                    </div>
                     <div>
                       <h4 className="font-bold">Set Academic Goals</h4>
                       <p className="text-muted-foreground">
-                        Define specific, measurable goals like "Maintain a 3.5 GPA" or "Become a club officer."
+                        Define specific, measurable goals like "Maintain a 3.5
+                        GPA" or "Become a club officer."
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">3</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      3
+                    </div>
                     <div>
                       <h4 className="font-bold">Verify Achievements</h4>
                       <p className="text-muted-foreground">
-                        Upload verification of completed goals through our secure verification system.
+                        Upload verification of completed goals through our
+                        secure verification system.
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">4</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      4
+                    </div>
                     <div>
                       <h4 className="font-bold">Receive Scholarships</h4>
                       <p className="text-muted-foreground">
-                        Get SUI tokens directly to your wallet when sponsors fund your achievements.
+                        Get SUI tokens directly to your wallet when sponsors
+                        fund your achievements.
                       </p>
                     </div>
                   </li>
@@ -228,38 +268,52 @@ export default function Home() {
                 </h3>
                 <ol className="space-y-4">
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">1</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      1
+                    </div>
                     <div>
                       <h4 className="font-bold">Create Sponsor Account</h4>
                       <p className="text-muted-foreground">
-                        Sign up as a sponsor and set up your SUI wallet for contributions.
+                        Sign up as a sponsor and set up your SUI wallet for
+                        contributions.
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">2</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      2
+                    </div>
                     <div>
                       <h4 className="font-bold">Browse Student Profiles</h4>
                       <p className="text-muted-foreground">
-                        Explore student profiles and their academic goals to find those you want to support.
+                        Explore student profiles and their academic goals to
+                        find those you want to support.
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">3</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      3
+                    </div>
                     <div>
-                      <h4 className="font-bold">Create Scholarship Contracts</h4>
+                      <h4 className="font-bold">
+                        Create Scholarship Contracts
+                      </h4>
                       <p className="text-muted-foreground">
-                        Set up smart contracts that automatically release funds when students meet specific criteria.
+                        Set up smart contracts that automatically release funds
+                        when students meet specific criteria.
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start">
-                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">4</div>
+                    <div className="mr-2 rounded-full bg-teal-100 p-1 text-teal-700">
+                      4
+                    </div>
                     <div>
                       <h4 className="font-bold">Track Impact</h4>
                       <p className="text-muted-foreground">
-                        Monitor the progress of students you've sponsored and see the real impact of your contributions.
+                        Monitor the progress of students you've sponsored and
+                        see the real impact of your contributions.
                       </p>
                     </div>
                   </li>
@@ -274,16 +328,23 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
               <div className="flex items-center justify-center">
-                <img src="/public/image.png" alt="SUI Blockchain" className="rounded-lg object-cover" />
+                <img
+                  src="/public/image.png"
+                  alt="SUI Blockchain"
+                  className="rounded-lg object-cover"
+                />
               </div>
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <div className="inline-block rounded-lg bg-teal-100 px-3 py-1 text-sm text-teal-700">
                     Powered by SUI
                   </div>
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Why We Use SUI Blockchain</h2>
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
+                    Why We Use SUI Blockchain
+                  </h2>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    SUI provides the perfect foundation for our decentralized scholarship platform with its:
+                    SUI provides the perfect foundation for our decentralized
+                    scholarship platform with its:
                   </p>
                 </div>
                 <ul className="space-y-2">
@@ -293,19 +354,28 @@ export default function Home() {
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-5 w-5 text-teal-600 mt-0.5" />
-                    <span>Smart contract functionality for automated scholarship distribution</span>
+                    <span>
+                      Smart contract functionality for automated scholarship
+                      distribution
+                    </span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-5 w-5 text-teal-600 mt-0.5" />
-                    <span>Immutable record-keeping for verified achievements</span>
+                    <span>
+                      Immutable record-keeping for verified achievements
+                    </span>
                   </li>
                   <li className="flex items-start space-x-2">
                     <CheckCircle className="h-5 w-5 text-teal-600 mt-0.5" />
-                    <span>Decentralized governance allowing community input</span>
+                    <span>
+                      Decentralized governance allowing community input
+                    </span>
                   </li>
                 </ul>
                 <div>
-                  <Button className="bg-teal-600 hover:bg-teal-700">Learn More About SUI Integration</Button>
+                  <Button className="bg-teal-600 hover:bg-teal-700">
+                    Learn More About SUI Integration
+                  </Button>
                 </div>
               </div>
             </div>
@@ -317,7 +387,9 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Frequently Asked Questions</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Frequently Asked Questions
+                </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed">
                   Get answers to common questions about our platform.
                 </p>
@@ -325,31 +397,43 @@ export default function Home() {
             </div>
             <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-2">
               <div className="rounded-lg border p-6">
-                <h3 className="text-xl font-bold">How are student achievements verified?</h3>
+                <h3 className="text-xl font-bold">
+                  How are student achievements verified?
+                </h3>
                 <p className="mt-2 text-muted-foreground">
-                  We use a combination of official academic records, verified institution emails, and blockchain
-                  attestations to ensure all achievements are legitimate.
+                  We use a combination of official academic records, verified
+                  institution emails, and blockchain attestations to ensure all
+                  achievements are legitimate.
                 </p>
               </div>
               <div className="rounded-lg border p-6">
-                <h3 className="text-xl font-bold">Do I need a SUI wallet to use the platform?</h3>
+                <h3 className="text-xl font-bold">
+                  Do I need a SUI wallet to use the platform?
+                </h3>
                 <p className="mt-2 text-muted-foreground">
-                  Yes, both students and sponsors need a SUI wallet. We provide easy setup guides and integration with
-                  popular wallet providers.
+                  Yes, both students and sponsors need a SUI wallet. We provide
+                  easy setup guides and integration with popular wallet
+                  providers.
                 </p>
               </div>
               <div className="rounded-lg border p-6">
-                <h3 className="text-xl font-bold">Can sponsors set specific criteria for scholarships?</h3>
+                <h3 className="text-xl font-bold">
+                  Can sponsors set specific criteria for scholarships?
+                </h3>
                 <p className="mt-2 text-muted-foreground">
-                  Sponsors can create custom smart contracts with specific achievement criteria, funding amounts, and
-                  distribution schedules.
+                  Sponsors can create custom smart contracts with specific
+                  achievement criteria, funding amounts, and distribution
+                  schedules.
                 </p>
               </div>
               <div className="rounded-lg border p-6">
-                <h3 className="text-xl font-bold">How do students convert SUI tokens to fiat currency?</h3>
+                <h3 className="text-xl font-bold">
+                  How do students convert SUI tokens to fiat currency?
+                </h3>
                 <p className="mt-2 text-muted-foreground">
-                  Students can use integrated exchanges or third-party services to convert SUI tokens to their preferred
-                  currency for educational expenses.
+                  Students can use integrated exchanges or third-party services
+                  to convert SUI tokens to their preferred currency for
+                  educational expenses.
                 </p>
               </div>
             </div>
@@ -365,13 +449,19 @@ export default function Home() {
                   Join the Decentralized Education Revolution
                 </h2>
                 <p className="max-w-[900px] md:text-xl/relaxed opacity-90">
-                  Whether you're a student seeking funding or a sponsor looking to make an impact, ScholarChain connects
-                  you directly with opportunities.
+                  Whether you're a student seeking funding or a sponsor looking
+                  to make an impact, ScholarChain connects you directly with
+                  opportunities.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button className="bg-white text-teal-600 hover:bg-gray-100">Apply as Student</Button>
-                <Button variant="outline" className="text-white border-white hover:bg-teal-700">
+                <Button className="bg-white text-teal-600 hover:bg-gray-100">
+                  Apply as Student
+                </Button>
+                <Button
+                  variant="outline"
+                  className="text-white border-white hover:bg-teal-700"
+                >
                   Become a Sponsor
                 </Button>
               </div>
@@ -391,19 +481,27 @@ export default function Home() {
             &copy; {new Date().getFullYear()} ScholarChain. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="text-sm text-muted-foreground hover:underline">
+            <Link
+              href="#"
+              className="text-sm text-muted-foreground hover:underline"
+            >
               Privacy Policy
             </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:underline">
+            <Link
+              href="#"
+              className="text-sm text-muted-foreground hover:underline"
+            >
               Terms of Service
             </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:underline">
+            <Link
+              href="#"
+              className="text-sm text-muted-foreground hover:underline"
+            >
               Contact Us
             </Link>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
-
