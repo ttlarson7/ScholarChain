@@ -274,13 +274,7 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px]">
               <div className="flex items-center justify-center">
-                {/* <Image
-                  src="/placeholder.svg?height=400&width=500"
-                  width={500}
-                  height={400}
-                  alt="SUI blockchain visualization"
-                  className="rounded-lg object-cover"
-                /> */}
+                <img src="/public/image.png" alt="SUI Blockchain" className="rounded-lg object-cover" />
               </div>
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
