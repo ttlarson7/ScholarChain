@@ -59,9 +59,7 @@ const ProtectedRoute = ({
   return children;
 };
 
-// Placeholder components for dashboard pages
-// You'll replace these with actual implementations later
-const StudentDashboard = () => <div>Student Dashboard</div>;
+import StudentDashboard from "@/pages/student/Dashboard";
 const ValidatorDashboard = () => <div>Validator Dashboard</div>;
 const SponsorDashboard = () => <div>Sponsor Dashboard</div>;
 
