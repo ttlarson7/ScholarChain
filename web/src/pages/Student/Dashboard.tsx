@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -32,10 +32,17 @@ import {
   Award,
   ChevronRight,
 } from "lucide-react";
-import { useStudentSBT } from "@/hooks/useStudentSBT";
+import { SuiClient } from "@mysten/sui/client";
+// import { fetchStudentSBTByOwner } from "@/hooks/useStudentSBT";
+import { useCurrentAccount, useSignAndExecuteTransaction, useSuiClient } from "@mysten/dapp-kit";
+import { TESTNET_SCHOLARSHIP_PACKAGE_ID } from "@/lib/constants";
+import { Transaction } from "@mysten/sui/transactions";
+import { useSBTMetadataUpdate } from "@/hooks/useSBTMetadataUpdate";
+
 
 const StudentDashboard: React.FC = () => {
   // Helper function to get initials from name
+  const { updateMetadata, isSuccess, isPending } = useSBTMetadataUpdate();
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -44,8 +51,53 @@ const StudentDashboard: React.FC = () => {
       .toUpperCase()
       .substring(0, 2);
   };
-  const { studentSBT, loading: loadingSBT, refetch } = useStudentSBT();
+  const [studentSBT, setStudentSBT] = useState<any>(null);
+  const currentAccount = useCurrentAccount();
+  const suiClient = useSuiClient();
+  useEffect(() => {
+    const fetchStudentSBT = async () => {
+      if (!currentAccount?.address) {
 
+        return;
+      }
+      
+      try {
+
+        const objectsResponse = await suiClient.getOwnedObjects({
+          owner: currentAccount.address,
+          options: {
+            showType: true,
+            showContent: true,
+          },
+        });
+        
+        // Filter objects by the specific NFT type
+        const nftsOfType = objectsResponse.data.filter(obj => 
+          obj.data?.type && obj.data.type === `${TESTNET_SCHOLARSHIP_PACKAGE_ID}::student_sbt::StudentSBT`
+        );
+        
+        if (nftsOfType.length > 0) {
+          const objectData = await suiClient.getObject({
+            id: nftsOfType[0].data!.objectId,
+            options: { showContent: true, showOwner: true },
+          });
+          
+          console.log("Student SBT loaded:", objectData);
+          setStudentSBT(nftsOfType[0].data!.objectId);
+          console.log(`Object Id set: ${nftsOfType[0].data!.objectId}`)
+        } else {
+          console.log("No StudentSBT found for this account");
+        }
+      } catch (error) {
+        console.error("Error fetching StudentSBT:", error);
+      } finally {
+
+      }
+    };
+    
+    fetchStudentSBT();
+  }, [currentAccount, suiClient]);
+  
   // Profile state
   const [profileData, setProfileData] = useState({
     name: "",
@@ -478,8 +530,9 @@ const StudentDashboard: React.FC = () => {
                       <Button
                         type="submit"
                         className="bg-blue-600 hover:bg-blue-700 text-white"
-                        onClick={() => {
-                          console.log(`hello ${studentSBT}`);
+                        onClick={async () => {
+                          
+                          await updateMetadata(studentSBT, Object.values(profileData));
                           
                         }}
                       >

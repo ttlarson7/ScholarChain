@@ -1,6 +1,7 @@
 import { Transaction } from "@mysten/sui/transactions";
 import { useCurrentAccount, useSignAndExecuteTransaction, useSuiClient } from "@mysten/dapp-kit";
 import { Button } from "@/components/ui/button";
+import { TESTNET_SCHOLARSHIP_PACKAGE_ID } from "@/lib/constants";
 
 export function CreateVault({
   onCreated,
@@ -8,7 +9,7 @@ export function CreateVault({
   onCreated: (id: string) => void;
 }) {
   const fundingVaultPackageId =
-    "0x0989bf2e80a443acfbb971d58166532aecfa7095f710f84de33a6b6c15727892";
+  TESTNET_SCHOLARSHIP_PACKAGE_ID;
   const suiClient = useSuiClient();
   const currentAccount = useCurrentAccount();
   const {

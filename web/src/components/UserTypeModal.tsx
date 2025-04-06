@@ -96,7 +96,7 @@ const UserTypeModal: React.FC<UserTypeModalProps> = ({
                 arguments: [
                   tx.pure.address(currentAccount!.address),
                   tx.pure.address(vaultId),
-                  tx.pure.vector('u8', []),
+                  tx.pure.vector('string', []),
                   tx.pure.string(""),
                   tx.pure.u64(0),
                 ],
