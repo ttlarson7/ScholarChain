@@ -22,7 +22,7 @@ module scholarship::student_sbt {
         vault_id: address,
         funds_received: u64,
         milestone_status: vector<bool>,
-        metadata_hash: vector<u8>,
+        metadata: vector<String>,
         document_uri: Url,
         created_at: u64,
         last_stream_check: u64,
@@ -61,7 +61,7 @@ module scholarship::student_sbt {
     public fun mint(
         recipient: address,
         vault_id: address,
-        metadata_hash: vector<u8>,
+        metadata: vector<String>,
         document_uri: String,
         initial_milestones: u64,
         ctx: &mut TxContext
@@ -72,7 +72,7 @@ module scholarship::student_sbt {
             vault_id,
             funds_received: 0,
             milestone_status: init_milestones(initial_milestones),
-            metadata_hash,
+            metadata,
             document_uri: url::new_unsafe(string::to_ascii(document_uri)),
             created_at: tx_context::epoch(ctx),
             last_stream_check: tx_context::epoch(ctx),
@@ -189,7 +189,7 @@ module scholarship::student_sbt {
     public fun owner(sbt: &StudentSBT): address { sbt.owner }
     public fun vault_id(sbt: &StudentSBT): address { sbt.vault_id }
     public fun funds_received(sbt: &StudentSBT): u64 { sbt.funds_received }
-    public fun metadata_hash(sbt: &StudentSBT): &vector<u8> { &sbt.metadata_hash }
+    public fun metadata(sbt: &StudentSBT): &vector<String> { &sbt.metadata }
     public fun document_uri(sbt: &StudentSBT): &Url { &sbt.document_uri }
     public fun created_at(sbt: &StudentSBT): u64 { sbt.created_at }
     public fun last_stream_check(sbt: &StudentSBT): u64 { sbt.last_stream_check }
