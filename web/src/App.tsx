@@ -20,14 +20,33 @@ import Home from "@/pages/Home";
 //import SponsorDashboard from "@/pages/sponsor/Dashboard";
 //import SponsorScholarships from "@/pages/sponsor/Scholarships";
 
+import '@mysten/dapp-kit/dist/index.css';
+
+import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit';
+import { getFullnodeUrl } from '@mysten/sui/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+const networks = {
+	devnet: { url: getFullnodeUrl('devnet') },
+	mainnet: { url: getFullnodeUrl('mainnet') },
+  testnet: { url: getFullnodeUrl('testnet') },
+};
+
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+    <SuiClientProvider networks={networks} defaultNetwork="testnet">
+      <WalletProvider>
+        <Router>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </Router>
+        </WalletProvider>
+			</SuiClientProvider>
+		</QueryClientProvider>
   );
 };
 

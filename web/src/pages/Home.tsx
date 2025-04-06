@@ -9,6 +9,8 @@ import {
   FileCheck,
 } from "lucide-react";
 
+import { ConnectButton } from '@mysten/dapp-kit';
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -43,12 +45,7 @@ export default function Home() {
               >
                 FAQ
               </a>
-              <Button variant="outline" size="sm" className="ml-4">
-                Log In
-              </Button>
-              <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                Sign Up
-              </Button>
+              <ConnectButton />
             </nav>
           </div>
         </div>
