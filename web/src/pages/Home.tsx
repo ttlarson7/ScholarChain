@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Award,
@@ -8,10 +9,18 @@ import {
   Users,
   FileCheck,
 } from "lucide-react";
-
-import { ConnectButton } from '@mysten/dapp-kit';
+import { UserType } from "@/contexts/UserTypeContext";
+import UserTypeModal from "@/components/UserTypeModal";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedType, setSelectedType] = useState<UserType>(null);
+
+  const handleJoinClick = (type: UserType) => {
+    setSelectedType(type);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Header */}
@@ -25,7 +34,7 @@ export default function Home() {
             />
             <span>ScholarChain</span>
           </div>
-          <div className="flex flex-1 items-center justify-end space-x-4">
+          <div className="flex flex-1 items-center justify-end space-x-4 mr-6">
             <nav className="flex items-center space-x-5">
               <a
                 href="#features"
@@ -45,7 +54,6 @@ export default function Home() {
               >
                 FAQ
               </a>
-              <ConnectButton />
             </nav>
           </div>
         </div>
@@ -68,13 +76,22 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                  <Button className="bg-blue-600 hover:bg-blue-700">
+                  <Button
+                    className="bg-blue-600 hover:bg-blue-700"
+                    onClick={() => handleJoinClick("student")}
+                  >
                     Join as Student
                   </Button>
-                  <Button className="bg-green-600 hover:bg-green-700">
+                  <Button
+                    className="bg-green-600 hover:bg-green-700"
+                    onClick={() => handleJoinClick("validator")}
+                  >
                     Join as Validator
                   </Button>
-                  <Button className="bg-purple-600 hover:bg-purple-700">
+                  <Button
+                    className="bg-purple-600 hover:bg-purple-700"
+                    onClick={() => handleJoinClick("sponsor")}
+                  >
                     Join as Sponsor
                   </Button>
                 </div>
@@ -133,7 +150,10 @@ export default function Home() {
                   directly for achieving educational goals. Your achievements
                   become verifiable NFTs.
                 </p>
-                <Button className="mt-2 bg-blue-600 hover:bg-blue-700 w-full">
+                <Button
+                  className="mt-2 bg-blue-600 hover:bg-blue-700 w-full"
+                  onClick={() => handleJoinClick("student")}
+                >
                   Join as Student
                 </Button>
               </div>
@@ -147,7 +167,10 @@ export default function Home() {
                   credentials and achievements, ensuring the integrity of the
                   platform.
                 </p>
-                <Button className="mt-2 bg-green-600 hover:bg-green-700 w-full">
+                <Button
+                  className="mt-2 bg-green-600 hover:bg-green-700 w-full"
+                  onClick={() => handleJoinClick("validator")}
+                >
                   Join as Validator
                 </Button>
               </div>
@@ -161,7 +184,10 @@ export default function Home() {
                   funds go directly to deserving students who meet your specific
                   criteria.
                 </p>
-                <Button className="mt-2 bg-purple-600 hover:bg-purple-700 w-full">
+                <Button
+                  className="mt-2 bg-purple-600 hover:bg-purple-700 w-full"
+                  onClick={() => handleJoinClick("sponsor")}
+                >
                   Join as Sponsor
                 </Button>
               </div>
@@ -554,13 +580,22 @@ export default function Home() {
                 </p>
               </div>
               <div className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-3">
-                <Button className="bg-white text-blue-600 hover:bg-gray-100">
+                <Button
+                  className="bg-white text-blue-600 hover:bg-gray-100"
+                  onClick={() => handleJoinClick("student")}
+                >
                   Join as Student
                 </Button>
-                <Button className="bg-white text-green-600 hover:bg-gray-100">
+                <Button
+                  className="bg-white text-green-600 hover:bg-gray-100"
+                  onClick={() => handleJoinClick("validator")}
+                >
                   Join as Validator
                 </Button>
-                <Button className="bg-white text-purple-600 hover:bg-gray-100">
+                <Button
+                  className="bg-white text-purple-600 hover:bg-gray-100"
+                  onClick={() => handleJoinClick("sponsor")}
+                >
                   Join as Sponsor
                 </Button>
               </div>
@@ -605,6 +640,13 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* User Type Modal */}
+      <UserTypeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedType={selectedType}
+      />
     </div>
   );
 }
