@@ -32,6 +32,7 @@ import {
   Award,
   ChevronRight,
 } from "lucide-react";
+import { useStudentSBT } from "@/hooks/useStudentSBT";
 
 const StudentDashboard: React.FC = () => {
   // Helper function to get initials from name
@@ -43,6 +44,7 @@ const StudentDashboard: React.FC = () => {
       .toUpperCase()
       .substring(0, 2);
   };
+  const { studentSBT, loading: loadingSBT, refetch } = useStudentSBT();
 
   // Profile state
   const [profileData, setProfileData] = useState({
@@ -476,6 +478,10 @@ const StudentDashboard: React.FC = () => {
                       <Button
                         type="submit"
                         className="bg-blue-600 hover:bg-blue-700 text-white"
+                        onClick={() => {
+                          console.log(`hello ${studentSBT}`);
+                          
+                        }}
                       >
                         <Save className="h-4 w-4 mr-2" />
                         Save Profile
