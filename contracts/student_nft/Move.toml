@@ -1,0 +1,10 @@
+[package]
+name = "student_nft"
+edition = "2024.alpha" 
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/devnet" }
+
+[addresses]
+student = "0x0"
+sui = "0x2"
