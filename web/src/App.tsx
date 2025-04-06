@@ -67,7 +67,7 @@ const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={networks} defaultNetwork="testnet">
-        <WalletProvider>
+        <WalletProvider autoConnect={true}>
           <UserTypeProvider>
             <Router>
               <Routes>
