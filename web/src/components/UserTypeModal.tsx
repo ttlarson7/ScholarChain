@@ -28,7 +28,7 @@ const UserTypeModal: React.FC<UserTypeModalProps> = ({
   const navigate = useNavigate();
 
     const fundingVaultPackageId =
-      "0x60e93ad3acb0546443c33c093ce2713757bee4926a45174b0f660bf73df2a390";
+      "0x73c635e8402efdf07f1c1d3f7862f97cb4953d025ce690b95de8ba1a33407fc4";
     const suiClient = useSuiClient();
     const currentAccount = useCurrentAccount();
     const {
