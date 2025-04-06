@@ -115,7 +115,7 @@ module scholarship::funding_vault {
     }
 
     // New deposit function with stream support
-    public fun deposit_with_stream(
+    fun deposit_with_stream(
         vault: &mut FundingVault,
         payment: Coin<SUI>,
         milestone_index: u64,

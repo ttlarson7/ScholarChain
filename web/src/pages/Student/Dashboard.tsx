@@ -52,6 +52,7 @@ const StudentDashboard: React.FC = () => {
       .substring(0, 2);
   };
   const [studentSBT, setStudentSBT] = useState<any>(null);
+  const [studentSBTObject, setStudentSBTObject] = useState<any>(null);
   const currentAccount = useCurrentAccount();
   const suiClient = useSuiClient();
   useEffect(() => {
@@ -83,6 +84,8 @@ const StudentDashboard: React.FC = () => {
           });
           
           console.log("Student SBT loaded:", objectData);
+          setStudentSBTObject(objectData);
+          
           setStudentSBT(nftsOfType[0].data!.objectId);
           console.log(`Object Id set: ${nftsOfType[0].data!.objectId}`)
         } else {
@@ -345,7 +348,7 @@ const StudentDashboard: React.FC = () => {
                 <p className="text-sm font-medium text-gray-500">
                   Total Received
                 </p>
-                <h3 className="text-3xl font-bold text-gray-900">$7,500</h3>
+                <h3 className="text-3xl font-bold text-gray-900">{ studentSBTObject.data.content.fields.funds_received }</h3>
                 <p className="text-xs text-gray-500 mt-1">
                   From 2 scholarships
                 </p>
@@ -359,7 +362,7 @@ const StudentDashboard: React.FC = () => {
                 <p className="text-sm font-medium text-gray-500">
                   Pending Applications
                 </p>
-                <h3 className="text-3xl font-bold text-gray-900">$12,500</h3>
+                <h3 className="text-3xl font-bold text-gray-900">{ studentSBTObject.data.content.fields.funds_received }</h3>
                 <p className="text-xs text-gray-500 mt-1">
                   From 3 scholarships
                 </p>
