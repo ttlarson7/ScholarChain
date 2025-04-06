@@ -12,6 +12,7 @@ import {
 import { UserType, useUserType } from "@/contexts/UserTypeContext";
 import { GraduationCap, FileCheck, Users } from "lucide-react";
 import { Transaction } from "@mysten/sui/transactions";
+import { TESTNET_SCHOLARSHIP_PACKAGE_ID } from "@/lib/constants";
 
 type UserTypeModalProps = {
   isOpen: boolean;
@@ -27,8 +28,6 @@ const UserTypeModal: React.FC<UserTypeModalProps> = ({
   const { setUserType, isLoggedIn } = useUserType();
   const navigate = useNavigate();
 
-    const fundingVaultPackageId =
-      "0x73c635e8402efdf07f1c1d3f7862f97cb4953d025ce690b95de8ba1a33407fc4";
     const suiClient = useSuiClient();
     const currentAccount = useCurrentAccount();
     const {
@@ -69,7 +68,7 @@ const UserTypeModal: React.FC<UserTypeModalProps> = ({
 
       tx.moveCall({
         arguments: [tx.pure.address(currentAccount!.address)],
-        target: `${fundingVaultPackageId}::funding_vault::create_vault`,
+        target: `${TESTNET_SCHOLARSHIP_PACKAGE_ID}::funding_vault::create_vault`,
       });
 
       signAndExecute(
@@ -101,7 +100,7 @@ const UserTypeModal: React.FC<UserTypeModalProps> = ({
                   tx.pure.string(""),
                   tx.pure.u64(0),
                 ],
-                target: `${fundingVaultPackageId}::student_sbt::mint`,
+                target: `${TESTNET_SCHOLARSHIP_PACKAGE_ID}::student_sbt::mint`,
               });
 
               signAndExecute(
@@ -141,7 +140,7 @@ const UserTypeModal: React.FC<UserTypeModalProps> = ({
     
         // Filter objects by the specific NFT type
         const nftsOfType = objectsResponse.data.filter(obj => 
-          obj.data?.type && obj.data.type.includes("student_sbt::StudentSBT")
+          obj.data?.type && obj.data.type === `${TESTNET_SCHOLARSHIP_PACKAGE_ID}::student_sbt::StudentSBT`
         );
     
         // Return true if any matching NFTs were found

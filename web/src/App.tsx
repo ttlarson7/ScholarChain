@@ -60,8 +60,8 @@ const ProtectedRoute = ({
 };
 
 import StudentDashboard from "@/pages/student/Dashboard";
+import StudentSBTDashboard from "./pages/sponsor/Dashboard";
 const ValidatorDashboard = () => <div>Validator Dashboard</div>;
-const SponsorDashboard = () => <div>Sponsor Dashboard</div>;
 
 const App: React.FC = () => {
   return (
@@ -99,7 +99,7 @@ const App: React.FC = () => {
                   path="/sponsor/dashboard"
                   element={
                     <ProtectedRoute requiredUserType="sponsor">
-                      <SponsorDashboard />
+                      <StudentSBTDashboard />
                     </ProtectedRoute>
                   }
                 />
