@@ -1,7 +1,6 @@
 module scholarship::student_sbt {
     use sui::object::{Self, UID};
     use sui::tx_context::{Self, TxContext};
-    use sui::url::{Self, Url};
     use sui::transfer;
     use sui::event;
     use std::string::{Self, String};
@@ -15,7 +14,7 @@ module scholarship::student_sbt {
     const EInvalidMilestoneStatus: u64 = 1;
     const ETransferNotAllowed: u64 = 2;
 
-    // Changed struct name from StudentNFT to StudentSBT
+    // Changed struct to use vector<address> for document storage
     public struct StudentSBT has key {
         id: UID,
         owner: address,
@@ -23,7 +22,8 @@ module scholarship::student_sbt {
         funds_received: u64,
         milestone_status: vector<bool>,
         metadata: vector<String>,
-        document_uri: Url,
+        // Changed from Url to vector of addresses
+        documents: vector<address>,
         created_at: u64,
         last_stream_check: u64,
     }
@@ -56,24 +56,23 @@ module scholarship::student_sbt {
         timestamp: u64,
     }
 
-    // Mint a new student_sbt - Note that we removed the 'store' ability from the type
-    // This makes it non-transferable (soul-bound)
+    // Updated mint function to accept vector<address> for documents
     public fun mint(
         recipient: address,
         vault_id: address,
         metadata: vector<String>,
-        document_uri: String,
+        documents: vector<address>,
         initial_milestones: u64,
         ctx: &mut TxContext
     ) {
         let student_sbt = StudentSBT {
             id: object::new(ctx),
-            owner: recipient, // Store the recipient address
+            owner: recipient,
             vault_id,
             funds_received: 0,
             milestone_status: init_milestones(initial_milestones),
             metadata,
-            document_uri: url::new_unsafe(string::to_ascii(document_uri)),
+            documents, // Now takes a vector of BLOBs
             created_at: tx_context::epoch(ctx),
             last_stream_check: tx_context::epoch(ctx),
         };
@@ -84,7 +83,6 @@ module scholarship::student_sbt {
             timestamp: tx_context::epoch(ctx),
         });
 
-        // Use transfer::transfer to send the SBT to the recipient
         transfer::transfer(student_sbt, recipient);
     }
 
@@ -97,6 +95,46 @@ module scholarship::student_sbt {
             i = i + 1;
         };
         milestones
+    }
+
+    public fun update_metadata(
+        sbt: &mut StudentSBT,
+        metadata: vector<String>,
+        ctx: &mut TxContext
+    ) {
+        assert!(tx_context::sender(ctx) == sbt.owner, ENotAuthorized);
+        sbt.metadata = metadata;
+    }
+
+    // New function to update documents
+    public fun update_documents(
+        sbt: &mut StudentSBT,
+        documents: vector<address>,
+        ctx: &mut TxContext
+    ) {
+        assert!(tx_context::sender(ctx) == sbt.owner, ENotAuthorized);
+        sbt.documents = documents;
+    }
+
+    // Add a new document to the vector
+    public fun add_document(
+        sbt: &mut StudentSBT,
+        document: address,
+        ctx: &mut TxContext
+    ) {
+        assert!(tx_context::sender(ctx) == sbt.owner, ENotAuthorized);
+        vector::push_back(&mut sbt.documents, document);
+    }
+
+    // Remove a document at a specific index
+    public fun remove_document(
+        sbt: &mut StudentSBT,
+        index: u64,
+        ctx: &mut TxContext
+    ) {
+        assert!(tx_context::sender(ctx) == sbt.owner, ENotAuthorized);
+        assert!(index < vector::length(&sbt.documents), EInvalidMilestoneStatus);
+        vector::remove(&mut sbt.documents, index);
     }
 
     // Update milestone status and automatically check for fund release
@@ -137,7 +175,7 @@ module scholarship::student_sbt {
         }
     }
 
-    // New function to check and process streams
+    // Function to check and process streams
     public fun check_streams(
         sbt: &mut StudentSBT,
         vault: &mut funding_vault::FundingVault,
@@ -181,19 +219,24 @@ module scholarship::student_sbt {
         });
     }
 
-    // Add a function to verify ownership (useful for front-end)
+    // Function to verify ownership
     public fun is_owner(sbt: &StudentSBT, addr: address): bool {
         sbt.owner == addr
     }
 
+    // Getters
     public fun owner(sbt: &StudentSBT): address { sbt.owner }
     public fun vault_id(sbt: &StudentSBT): address { sbt.vault_id }
     public fun funds_received(sbt: &StudentSBT): u64 { sbt.funds_received }
     public fun metadata(sbt: &StudentSBT): &vector<String> { &sbt.metadata }
-    public fun document_uri(sbt: &StudentSBT): &Url { &sbt.document_uri }
+    public fun documents(sbt: &StudentSBT): &vector<address> { &sbt.documents }
+    public fun document_at(sbt: &StudentSBT, index: u64): address {
+        assert!(index < vector::length(&sbt.documents), EInvalidMilestoneStatus);
+        *vector::borrow(&sbt.documents, index)
+    }
     public fun created_at(sbt: &StudentSBT): u64 { sbt.created_at }
     public fun last_stream_check(sbt: &StudentSBT): u64 { sbt.last_stream_check }
-
+    
     public fun milestone_status(sbt: &StudentSBT, index: u64): bool {
         assert!(index < vector::length(&sbt.milestone_status), EInvalidMilestoneStatus);
         *vector::borrow(&sbt.milestone_status, index)
