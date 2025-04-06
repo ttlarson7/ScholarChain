@@ -43,10 +43,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useSuiClient } from "@mysten/dapp-kit";
+import { useCurrentAccount, useSignAndExecuteTransaction, useSuiClient } from "@mysten/dapp-kit";
 import { graphql } from '@mysten/sui/graphql/schemas/latest';
 import { TESTNET_SCHOLARSHIP_PACKAGE_ID } from "@/lib/constants";
 import { SuiGraphQLClient } from '@mysten/sui/graphql';
+import { Transaction } from "@mysten/sui/transactions";
+
 
 const StudentSBTDashboard = () => {
   const [students, setStudents] = useState([]);
@@ -58,6 +60,9 @@ const StudentSBTDashboard = () => {
   const gqlClient = new SuiGraphQLClient({
     url: "https://sui-testnet.mystenlabs.com/graphql",
   });
+  const currentAccount = useCurrentAccount();
+  
+  const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
   const chainObjectsByTypeQuery = graphql(`
     query GetObjectsByType($type: String!, $first: Int!, $after: String) {
@@ -173,6 +178,51 @@ const StudentSBTDashboard = () => {
     if (address.length <= 12) return address;
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
+
+  const handleSponsorClick = async (vaultId: string) => {
+    
+    // Handle the sponsor button click here
+    console.log("Sponsor button clicked for vault:", vaultId);
+
+    const coins = await suiClient.getCoins({
+      owner: currentAccount!.address,
+      coinType: '0x2::sui::SUI',
+    });
+
+    const amount = 500_000;
+
+    const mainCoin = coins.data.find((c) => BigInt(c.balance) > BigInt(amount));
+    if (!mainCoin) throw new Error('Not enough SUI balance');
+
+    const tx = new Transaction();
+
+    const [splitCoin] = tx.splitCoins(tx.object(mainCoin.coinObjectId), [
+      tx.pure.u64(amount),
+    ]);
+
+    tx.moveCall({
+      arguments: [
+        tx.object(vaultId),
+        splitCoin,
+        tx.pure.u64(0),
+      ],
+      target: `${TESTNET_SCHOLARSHIP_PACKAGE_ID}::funding_vault::deposit`,
+    });
+
+    signAndExecute(
+      {
+        transaction: tx,
+      },
+      {
+        onSuccess: async ({ digest }) => {
+          console.log("Deposit transaction sent:", digest);
+        },
+        onError: (error) => {
+          console.error("Error sending deposit transaction:", error);
+        }
+      }
+    );
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -294,7 +344,7 @@ const StudentSBTDashboard = () => {
                       </span>
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                      <Button className="bg-blue-500 text-white hover:bg-blue-600" onClick={() => handleSponsorClick(student.sbtId)}>
                         Sponsor
                       </Button>
                     </TableCell>
