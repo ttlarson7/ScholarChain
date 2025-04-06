@@ -120,10 +120,13 @@ const StudentSBTDashboard = () => {
             // Map the blockchain data to our component's data structure
             return {
               id: nft.address,
-              name: fields.name || "Unknown Student",
+              name: fields.metadata[0] || "Unknown Student",
               walletAddress: owner || "Unknown Owner",
               sbtId: nft.address,
-              program: fields.program || "Unknown Program",
+              program: fields.metadata[3] || "Unknown Program",
+              school: fields.metadata[1] || "Unknown School",
+              year: fields.metadata[2] || "Unknown Year",
+              gpa: fields.metadata[4] || "Unknown GPA",
               status: fields.status || "active",
               attributes: fields.metadata?.map((attr) => attr.name) || [],
             };
@@ -179,7 +182,14 @@ const StudentSBTDashboard = () => {
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
 
-  const handleSponsorClick = async (vaultId: string) => {
+  const handleSponsorClick = async (studentSbt: string) => {
+
+    // Fetch the vault ID from the SBT object
+    const response = await suiClient.getObject({
+      id: studentSbt,
+      options: { showContent: true },
+    });
+    const vaultId = response.data?.content?.fields?.vault_id;
     
     // Handle the sponsor button click here
     console.log("Sponsor button clicked for vault:", vaultId);
@@ -195,10 +205,9 @@ const StudentSBTDashboard = () => {
     if (!mainCoin) throw new Error('Not enough SUI balance');
 
     const tx = new Transaction();
+    tx.setGasBudget(10_000_000); // ~0.01 SUI
 
-    const [splitCoin] = tx.splitCoins(tx.object(mainCoin.coinObjectId), [
-      tx.pure.u64(amount),
-    ]);
+    const [splitCoin] = tx.splitCoins(tx.gas, [amount])
 
     tx.moveCall({
       arguments: [
@@ -316,7 +325,9 @@ const StudentSBTDashboard = () => {
                   <TableHead>Wallet Address</TableHead>
                   <TableHead>SBT ID</TableHead>
                   <TableHead>Program</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead>School</TableHead>
+                  <TableHead>Year</TableHead>
+                  <TableHead>GPA</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -333,16 +344,9 @@ const StudentSBTDashboard = () => {
                       {truncateAddress(student.sbtId)}
                     </TableCell>
                     <TableCell>{student.program}</TableCell>
-                    <TableCell>
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(
-                          student.status
-                        )}`}
-                      >
-                        {student.status.charAt(0).toUpperCase() +
-                          student.status.slice(1)}
-                      </span>
-                    </TableCell>
+                    <TableCell>{student.school}</TableCell>
+                    <TableCell>{student.year}</TableCell>
+                    <TableCell>{student.gpa}</TableCell>
                     <TableCell className="text-right">
                       <Button className="bg-blue-500 text-white hover:bg-blue-600" onClick={() => handleSponsorClick(student.sbtId)}>
                         Sponsor
