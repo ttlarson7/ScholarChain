@@ -54,6 +54,7 @@ const StudentDashboard: React.FC = () => {
   const [studentSBT, setStudentSBT] = useState<any>(null);
   const [studentSBTObject, setStudentSBTObject] = useState<any>(null);
   const currentAccount = useCurrentAccount();
+  const [funds, setFunds] = useState(0);
   const suiClient = useSuiClient();
   useEffect(() => {
     const fetchStudentSBT = async () => {
@@ -351,7 +352,7 @@ const StudentDashboard: React.FC = () => {
                 <h3 className="text-3xl font-bold text-gray-900">{studentSBTObject && studentSBTObject.data && 
            studentSBTObject.data.content && 
            studentSBTObject.data.content.fields ? 
-           studentSBTObject.data.content.fields.funds_received : 
+           `${funds} SUI` : 
            "Loading..."}</h3>
                 <p className="text-xs text-gray-500 mt-1">
                   From 2 scholarships
@@ -920,7 +921,7 @@ const StudentDashboard: React.FC = () => {
   <p className="text-sm text-gray-500 max-w-2xl">
     All achievements require verification by your academic institution before they appear publicly on your profile.
   </p>
-  <Button className="bg-blue-600 hover:bg-blue-700 text-white ml-4">
+  <Button className="bg-blue-600 hover:bg-blue-700 text-white ml-4" onClick={() => setFunds(funds + 1)}>
     Update Achievements
   </Button>
 </CardFooter>
