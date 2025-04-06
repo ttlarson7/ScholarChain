@@ -12,6 +12,9 @@ import {
 import { UserType } from "@/contexts/UserTypeContext";
 import UserTypeModal from "@/components/UserTypeModal";
 
+import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit';
+import { CreateVault } from "@/components/VaultComponent";
+
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedType, setSelectedType] = useState<UserType>(null);
@@ -20,6 +23,13 @@ export default function Home() {
     setSelectedType(type);
     setIsModalOpen(true);
   };
+
+  const currentAccount = useCurrentAccount();
+  const [vaultId, setVaultId] = useState(() => {
+    const hash = window.location.hash.slice(1);
+    return hash;
+  });
+  const [inputVaultId, setInputVaultId] = useState(vaultId);
 
   return (
     <div className="flex min-h-screen flex-col">
