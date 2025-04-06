@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea"
 import {
   Select,
   SelectContent,
@@ -720,133 +721,142 @@ const StudentDashboard: React.FC = () => {
             </Card>
           </TabsContent>
 
-          {/* Achievements Tab */}
           <TabsContent value="achievements">
-            <Card className="shadow-sm rounded-lg overflow-hidden">
-              <CardHeader className="bg-gray-50 border-b">
-                <CardTitle className="flex items-center">
-                  <BookOpen className="h-5 w-5 mr-2 text-blue-600" />
-                  Academic Achievements
-                </CardTitle>
-                <CardDescription>
-                  Track and showcase your academic accomplishments
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="space-y-6">
-                  {/* Academic Achievements */}
-                  <div>
-                    <h3 className="text-lg font-medium mb-4">
-                      Academic Honors
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="border rounded-lg p-4 bg-white overflow-hidden">
-                        <div className="flex items-start mb-2">
-                          <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center mr-3 mt-1">
-                            <Award className="h-5 w-5 text-blue-600" />
-                          </div>
-                          <div>
-                            <h4 className="font-medium">Dean's List</h4>
-                            <p className="text-sm text-gray-600">Fall 2024</p>
-                            <div className="mt-2">
-                              <Badge className="bg-green-100 text-green-800 border-green-200">
-                                Verified
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+  <Card className="shadow-sm rounded-lg overflow-hidden">
+    <CardHeader className="bg-gray-50 border-b">
+      <CardTitle className="flex items-center">
+        Academic Achievements
+      </CardTitle>
+      <CardDescription>
+        Track and update your academic accomplishments
+      </CardDescription>
+    </CardHeader>
+    <CardContent className="pt-6">
+      <div className="space-y-6">
+        {/* GPA Section */}
+        <div>
+          <h3 className="text-lg font-medium mb-4">Academic Progress</h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="current-gpa">Current GPA</Label>
+              <Select>
+                <SelectTrigger id="current-gpa" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                  <SelectValue placeholder="Select your GPA" />
+                </SelectTrigger>
+                          <SelectContent className="bg-white">
+                          <SelectItem value="4.0" className="hover:bg-gray-100">Select your GPA</SelectItem>          
+                  <SelectItem value="4.0" className="hover:bg-gray-100">4.0</SelectItem>
+                  <SelectItem value="3.9" className="hover:bg-gray-100"> Greater than 3.5</SelectItem>
+                  <SelectItem value="3.8" className="hover:bg-gray-100">Greater than 3.0</SelectItem>
+                  <SelectItem value="3.7" className="hover:bg-gray-100">Greater than 2.5</SelectItem>
+                  <SelectItem value="3.6" className="hover:bg-gray-100">Greater than 2.0</SelectItem>
+                  <SelectItem value="3.5" className="hover:bg-gray-100">Less than 2.0</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="years-completed">Years Completed</Label>
+              <Select>
+                <SelectTrigger id="years-completed" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                  <SelectValue placeholder="Select years completed" />
+                </SelectTrigger>
+                          <SelectContent className="bg-white">
+                          <SelectItem value="freshman" className="hover:bg-gray-100">Select years completed</SelectItem>
+                  <SelectItem value="freshman" className="hover:bg-gray-100">Freshman (1st year)</SelectItem>
+                  <SelectItem value="sophomore" className="hover:bg-gray-100">Sophomore (2nd year)</SelectItem>
+                  <SelectItem value="junior" className="hover:bg-gray-100">Junior (3rd year)</SelectItem>
+                  <SelectItem value="senior" className="hover:bg-gray-100">Senior (4th year)</SelectItem>
+                  <SelectItem value="5plus" className="hover:bg-gray-100">5+ years</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
 
-                      <div className="border rounded-lg p-4 bg-white overflow-hidden">
-                        <div className="flex items-start mb-2">
-                          <div className="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center mr-3 mt-1">
-                            <BookOpen className="h-5 w-5 text-purple-600" />
-                          </div>
-                          <div>
-                            <h4 className="font-medium">
-                              Outstanding Research Award
-                            </h4>
-                            <p className="text-sm text-gray-600">Spring 2024</p>
-                            <p className="text-sm text-gray-600 mt-1">
-                              Computer Science Department
-                            </p>
-                            <div className="mt-2">
-                              <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
-                                Pending Verification
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        
 
-                  {/* Add Achievement Form */}
-                  <div className="mt-6 border-t pt-6">
-                    <h3 className="text-lg font-medium mb-4">
-                      Add New Achievement
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="space-y-2">
-                          <Label htmlFor="achievement-title">
-                            Achievement Title
-                          </Label>
-                          <Input
-                            id="achievement-title"
-                            placeholder="e.g., Scholarship, Award, Honor"
-                            className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="achievement-date">
-                            Date Received
-                          </Label>
-                          <Input
-                            id="achievement-date"
-                            type="date"
-                            className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div className="space-y-2 sm:col-span-2">
-                          <Label htmlFor="achievement-description">
-                            Description
-                          </Label>
-                          <Input
-                            id="achievement-description"
-                            placeholder="Brief description of your achievement"
-                            className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div className="space-y-2 sm:col-span-2">
-                          <Label htmlFor="achievement-document">
-                            Supporting Document (Optional)
-                          </Label>
-                          <Input
-                            id="achievement-document"
-                            type="file"
-                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                            className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex justify-end mt-4">
-                        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                          Add Achievement
-                        </Button>
-                      </div>
+        {/* Add Achievement Form */}
+        <div className="mt-6 border-t pt-6">
+          <h3 className="text-lg font-medium mb-4">Add New Achievement or Award</h3>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="award-title">Award Title</Label>
+                <Input
+                  id="award-title"
+                  placeholder="e.g., Scholarship, Award, Honor"
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="award-date">Date Received</Label>
+                <Input
+                  id="award-date"
+                  type="date"
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="award-issuer">Issued By</Label>
+                <Input
+                  id="award-issuer"
+                  placeholder="e.g., Department, College, University"
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="award-type">Award Type</Label>
+                <Select>
+                  <SelectTrigger id="award-type" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                    <SelectValue placeholder="Select award type" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="scholarship" className="hover:bg-gray-100">Scholarship</SelectItem>
+                    <SelectItem value="academic-honor" className="hover:bg-gray-100">Academic Honor</SelectItem>
+                    <SelectItem value="research" className="hover:bg-gray-100">Research Award</SelectItem>
+                    <SelectItem value="competition" className="hover:bg-gray-100">Competition</SelectItem>
+                    <SelectItem value="recognition" className="hover:bg-gray-100">Recognition</SelectItem>
+                    <SelectItem value="other" className="hover:bg-gray-100">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="award-description">Description</Label>
+                <Textarea
+                  id="award-description"
+                  placeholder="Brief description of your achievement or award"
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  rows={3}
+                />
+              </div>
+              <div className="space-y-2 sm:col-span-2">
+                <Label htmlFor="award-document">Supporting Document (Optional)</Label>
+                <Input
+                  id="award-document"
+                  type="file"
+                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                  className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+            
                     </div>
-                  </div>
-                </div>
+
+        </div>
+      </div>
               </CardContent>
-              <CardFooter className="border-t bg-gray-50">
-                <p className="text-sm text-gray-500">
-                  All achievements require verification by your academic
-                  institution before they appear on your profile.
-                </p>
-              </CardFooter>
-            </Card>
-          </TabsContent>
+              
+              <CardFooter className="border-t bg-gray-50 flex justify-between items-center p-4">
+  <p className="text-sm text-gray-500 max-w-2xl">
+    All achievements require verification by your academic institution before they appear publicly on your profile.
+  </p>
+  <Button className="bg-blue-600 hover:bg-blue-700 text-white ml-4">
+    Update Achievements
+  </Button>
+</CardFooter>
+              
+  </Card>
+</TabsContent>
 
           {/* Scholarships Tab */}
           <TabsContent value="scholarships">
