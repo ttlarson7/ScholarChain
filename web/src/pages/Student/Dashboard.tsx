@@ -173,28 +173,28 @@ const StudentDashboard: React.FC = () => {
                 className="flex items-center w-full justify-start text-left p-2 rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700"
               >
                 <User className="h-5 w-5 mr-2 text-blue-600" />
-                <span>My Profile</span>
+                Profile
               </TabsTrigger>
               <TabsTrigger
                 value="documents"
                 className="flex items-center w-full justify-start text-left p-2 rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700"
               >
                 <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                <span>My Documents</span>
+                Documents
               </TabsTrigger>
               <TabsTrigger
                 value="achievements"
                 className="flex items-center w-full justify-start text-left p-2 rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700"
               >
                 <BookOpen className="h-5 w-5 mr-2 text-blue-600" />
-                <span>Achievements</span>
+                Achievements
               </TabsTrigger>
               <TabsTrigger
                 value="scholarships"
                 className="flex items-center w-full justify-start text-left p-2 rounded-lg data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700"
               >
                 <Award className="h-5 w-5 mr-2 text-blue-600" />
-                <span>Scholarships</span>
+                Scholarships
               </TabsTrigger>
             </TabsList>
 
