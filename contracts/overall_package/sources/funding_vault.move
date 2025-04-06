@@ -63,7 +63,7 @@ module scholarship::funding_vault {
     ): address {
         let vault = FundingVault {
             id: object::new(ctx),
-            student_address,
+            student_address: tx_context::sender(ctx),
             balance: balance::zero<SUI>(),
             locked_amount: 0,
             sponsors: vector::empty<address>(),
@@ -75,7 +75,7 @@ module scholarship::funding_vault {
 
         event::emit(VaultCreated {
             vault_id,
-            student_address,
+            student_address: tx_context::sender(ctx),
             timestamp: tx_context::epoch(ctx),
         });
 
