@@ -348,7 +348,11 @@ const StudentDashboard: React.FC = () => {
                 <p className="text-sm font-medium text-gray-500">
                   Total Received
                 </p>
-                <h3 className="text-3xl font-bold text-gray-900">{ studentSBTObject.data.content.fields.funds_received }</h3>
+                <h3 className="text-3xl font-bold text-gray-900">{studentSBTObject && studentSBTObject.data && 
+           studentSBTObject.data.content && 
+           studentSBTObject.data.content.fields ? 
+           studentSBTObject.data.content.fields.funds_received : 
+           "Loading..."}</h3>
                 <p className="text-xs text-gray-500 mt-1">
                   From 2 scholarships
                 </p>
@@ -362,7 +366,11 @@ const StudentDashboard: React.FC = () => {
                 <p className="text-sm font-medium text-gray-500">
                   Pending Applications
                 </p>
-                <h3 className="text-3xl font-bold text-gray-900">{ studentSBTObject.data.content.fields.funds_received }</h3>
+                <h3 className="text-3xl font-bold text-gray-900">{studentSBTObject && studentSBTObject.data && 
+           studentSBTObject.data.content && 
+           studentSBTObject.data.content.fields ? 
+           studentSBTObject.data.content.fields.funds_received : 
+           "Loading..."}</h3>
                 <p className="text-xs text-gray-500 mt-1">
                   From 3 scholarships
                 </p>
